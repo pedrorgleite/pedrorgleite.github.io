@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<!--[if IE 8 ]><html class="no-js oldie ie8" lang="en"> <![endif]-->
+<!--[if IE 9 ]><html class="no-js oldie ie9" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+
+   <!--- basic page needs
+   ================================================== -->
+   <meta charset="utf-8">
+	<title>Amazon Warehouse Simulator</title>
+	<meta name="description" content="">  
+	<meta name="author" content="">
+
+   <!-- mobile specific metas
+   ================================================== -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+ 	<!-- CSS
+   ================================================== -->
+   <link rel="stylesheet" href="css/base.css">  
+   <link rel="stylesheet" href="css/main.css">
+   <link rel="stylesheet" href="css/vendor.css">
+
+   <style type="text/css" media="screen">
+
+   	#styles { 
+   		background: white;
+   		padding-top: 12rem;
+   		padding-bottom: 12rem;
+   	}
+   	#styles .row {
+   		max-width: 1024px;
+     	}
+     	#styles .section-intro {
+   		max-width: 800px;
+     	}
+      	
+   </style>       
+
+   <!-- script
+   ================================================== -->
+	<script src="js/modernizr.js"></script>
+	<script src="js/pace.min.js"></script>
+
+   <!-- favicons
+	================================================== -->
+	<link rel="icon" type="image/png" href="favicon.png">
+
+</head>
+
+<body id="top">
+
+	<!-- header 
+   ================================================== -->
+   <header>   	
+   	<div class="row">
+
+   		<div class="top-bar">
+   			<a class="menu-toggle" href="#"><span>Menu</span></a>
+
+
+		   	<nav id="main-nav-wrap">
+					<ul class="main-navigation">
+						<li><a href="index.html" title="">Home</a></li>
+						<li><a href="index.html#about" title="">About</a></li>
+						<li><a href="index.html#resume" title="">Resume</a></li>
+						<li><a href="index.html#portfolio" title="">Portfolio</a></li>					
+						<li><a class="smoothscroll"  href="#contact" title="">Contact</a></li>			
+					</ul>
+				</nav>    		
+   		</div> <!-- /top-bar --> 
+   		
+   	</div> <!-- /row --> 		
+   </header> <!-- /header -->
+
+	
+   <!-- Style Demo
+   ================================================== -->
+   <section id="styles">
+
+   	<div class="row section-intro">
+
+   		<div class="col-twelve">
+
+   			<h1>Amazon Warehouse Simulator</h1>
+
+   		</div>
+
+     	</div> <!-- /row -->
+
+     	<div class="row">
+
+     		<div>
+
+
+		      <p></a>
+		  		From October of 2021 up until December of 2021 I worked on a 2d warehouse simulator using c# and the .Net framework.</p>
+                This is a open source project and it is possible to run it using the following github link: 
+                <a href="https://github.com/pedrorgleite/AmazonWarehouseSim">https://github.com/pedrorgleite/AmazonWarehouseSim</a>
+				</p>
+
+		  		<p>
+		  		<h3>Summary </h3>
+                    <p>
+                        The project is developed to fulfill the ability of Amazoom’s warehousing automation. 
+                        With a single click from a user on the web frontend, the requested items are submitted 
+                        to the warehouse network and automatically loaded onto a delivery truck.  
+                    </p>
+                    <p>
+                        The web front end is feature rich interface for the user while, due to it being a web app, 
+                        retaining maximum compatibility with various devices. The user can browse all the items available 
+                        in the entire warehouse network and submit orders for various items. The interface also allows for 
+                        account creation, management, and validation.   
+                    </p>
+                    <p>
+                        The manager can view the warehouse network at the administration terminal. The central computer for 
+                        the warehouses will show the manager where each the merchandise is located, how many are in stock, 
+                        and the status of an order. The manager inputs the capacity of the truck in the loading bay, and he 
+                        may choose when to have the truck depart, allowing for flexible order fulfillment. A list of existing 
+                        items can be imported into the warehouse’s central computer in a csv file, and each warehouse can retrieve 
+                        the information from the csv file to populate the items in stock. Similarly, a warehouse configuration file 
+                        can be loaded, allowing for flexible creation of new warehouse layouts.  
+                    </p>
+                    <p>
+                        The administration terminal also notifies the manager of items that are low in-stock and allows the manager 
+                        to place a restock order of the items. It also allows the manager to add new merchandises or remove old 
+                        merchandises as needed. The manager may also search the status of the order using an Order ID number. 
+                        The manager can also see the list of orders that are waiting for delivery and can make decision of shipping 
+                        the delivery truck based on that.  
+                    </p>
+ 			   </p>
+                
+		  		<p>
+                <h3>System Overview </h3>
+                    <p>
+                        There are two primary components of this system that is interdependent on each other for the entire system to 
+                        run as a whole. The first system component is the Windows Form Application, which implements the warehouse 
+                        simulation. This includes the warehousing logistics, robot pathfinding, items restocking, central computer 
+                        notifications, dock scheduling, delivery vehicle queueing, order delivering, along with other associated 
+                        warehousing tasks when a transaction is executed.  
+                    </p>
+                    <p>
+                        The second system component is the Web Application built with the MVC framework. This is the web server that the client connects to when he visits Amazoom. The MVC framework contains the contents of the website that is served to the client, with most of the flow logic contained in the Controller. Once a client sends a request to purchase an item, an API will communicate with the server (Windows Form Application that was previously described), and the API of the server will process the request accordingly. This includes extracting the API query string, and tasking the robots based on the request the user sends. The database which the merchandise information is contained will consequently be updated, and this update is reflected on the client’s User Interface based on another API call. 
+                    </p>
+                    <p>
+                        In general, the Web Application will communicate with the Windows Forms Application bidirectionally through API calls. The SQL server will be accessed by the API calls and the updates as results of the API requests and responses will be reflected on both the server and the User Interface. The overlaying system architecture will be included in System Diagrams. 
+                    </p>
+                </p>
+
+                <p>
+                    <h3>Technical Stack </h3>
+                    <p>
+                        As described above, the front-end is comprised of the ASP.NET Web Application that is developed in C# language. This is developed using the Model View Controller (MVC) model such that the code organization is relatively easy to change. It has advantages such as easy integration with imported libraries, massive support from the Microsoft Community, and uses utilities carried from these libraries such as Authentication and SQL database querying. This also allows multiple clients to connect to the same website and place orders simultaneously. As it is a web application, it can be upgraded and scaled up if the user traffic increases. 
+                    </p>
+                    <p>
+                        The back-end application is developed in C# as a Windows Forms application running on .NET CORE. This decision considers the front-end UI integration which also runs on the .NET CORE, making the integration seamless. WinForms is considered an appropriate choice for back-end application since only the manager needs to have access to warehouse simulation and management. Commands will only be executed by the warehouse manager, and WinForms can directly manage the data flow from those commands. The communication between the web interface and the back-end application is executed via API queries, which consists of API listener developed with C# and inserts SQL instructions upon request. 
+                    </p>
+                </p>
+
+
+				<h3>System Architecture</h3>
+				<p><img src="images/warehouse_systemUML.png"></p>
+                The High-level architecture diagram above indicates the major components of the system. The first one is Web Application, which can be connected to by multiple clients and the second component is the Warehouse Network Server, which is hosted by the Server near the middle of the diagram. The Web Application and the Warehouse Network Server will communicate via API calls. The details of API calls are documented under Communication Protocols section. 
+				</p>
+				<p>
+                <h3>Use Cases</h3>
+				<div class="col-six tab-full">
+				<h4>Client Interface Use-Case Diagram</h4>
+				<p><img src="images/warehouse_useCaseUML.png"></p>
+				</p>
+				</div>
+				<div class="col-six tab-full">
+				<h4>Warehouse Interface Use-Case Diagram</h4>
+				<p><img src="images/warehouse_useCaseUML2.png"></p>
+				</p>
+				</div>
+				<p>
+                <h3>Class Diagram</h3>
+				<h4>Web UI UML Class Diagram</h4>
+				<p><img src="images/warehouse_classdiagramUML.png"></p>
+                The four primary classes utilized by the Web UI is drawn in the above diagram. The HomeController is a controller that re-directs calls coming from the index.cshtml page of the /Home path. The Merchandise class is communicated frequently to the MerchandisesController class, which the control logic of the Merchandise instances are orchestrated inside the MerchandisesController class. As shown, the methods that executes individual commands are listed under the MerchandisesController class, which directs the data towards the next methods that should be invoked. 
+				</p>
+				<div class="col-six tab-full">
+				<h4>Warehouse Interface Use-Case Diagram</h4>
+				<p><img src="images/warehouse_classDiagramUML2.png"></p>
+                In an individual warehouse, the warehouse class knows the information contained in Racks and Robots. The Position of the item can be contacted by all three classes, Item, Robot, and Rack such that operation of the next step of the simulation can be done. 
+				</p>
+				</div>
+				<div class="col-six tab-full">
+				<h4> Full System Warehouse Class Diagram</h4>
+				<p><img src="images/warehouse_classDiagramUML3.png"></p>
+                Above the diagram shows how the classes interact with one another on the backend server end which the WinForms application is hosted. The warehouse viewer can communicate with individual warehouses, and each warehouse contains a set of objects defined by classes of Robot, Item, Rack, and so on. The Robot class contain smart logic that can calculate a path and execute a job upon request. 
+				</p>
+				</div>
+				</p>
+				<h3>Object Interaction Diagrams </h4>
+				<div class="col-six tab-full">
+				<h4>Object Interaction Diagrams </h4>
+				<p><img src="images/warehouse_objectDiagram.png"></p>
+				</p>
+				</div>
+				<div class="col-six tab-full">
+				<h4> Full System Warehouse Class Diagram</h4>
+				<p><img src="images/warehouse_objectDiagram2.png"></p>
+				</p>
+				</div>				
+                <h3>Sequence Diagrams </h3>
+                The following sequence diagram describes the high-level sequence of the transactions when an user browses the web interface and sends a request to purchase a merchandise to the web server. As seen, the user will make the purchase request to the web server. The web server will convert that request in the format of a queryString and send it to the warehouse computer. The warehouse computer can confirm that the order can be successfully placed, and responds to the web server. The web server will then take that response and notify the database of the new changes that has been made, and the reflected database information will be presented to the website.  
+				<p><img src="images/warehouse_sequenceDiagram.png"></p>
+				</p>
+
+                <p>
+                <h3>Communication Protocols </h3>
+                Primary communication between the Web Interface and the server logic is implemented via an HTTP endpoint utilizing GET requests. In a high-level summary, the user’s request to place a purchase sends a query string into the API endpoint hosted on the Warehouse Network Server. This query string is constructed in the Web Server Controller for Merchandise page, responsible for data flow logic in the Web Interface. Subsequently, the GET request will wait for a response, either allowing or disallowing the purchasing of the item. </p>
+                <p>
+                In this communication, the query string is constructed using parameters such as the Merchandise ID, quantity the user wants to purchase, and the username. Upon transmission, they would be consumed by the endpoint. The endpoint has multiple query switch statements and can dynamically identify the query string and respond to GET requests, allowing the Warehouse to reflect the changes made by the user (E.g. Purchasing of merchandises), as well as updating the quantity of items back to the Web Interface. </p>
+                <p>
+                The Web Interface will update its list of merchandise after the purchase by executing SQL commands directly into the database, upon verification that the order is successfully placed. The Web Server will verify this request from the API response string generated by the Server that’s doing the simulation. 
+                </p>
+                <h3>Functional Specifications</h3>
+                <p>The following is a functional description of all public functions. There will also be a brief description of the classes and namespaces.</p>
+                <p><strong>Warehouse Classes and Functions</strong></p>
+                <p>All the overarching C# files used for the warehouse use the namespace &ldquo;Amazoom&rdquo; with the individual class files using the namespace &ldquo;Amazoom.Classes&rdquo;. This is utilized to allow all functions to communicate with each other efficiently.</p>
+                <p>The files <h4>Program</h4> and <h4>Startup</h4> initialize and run the warehouse Webserver and Winforms. The <strong>Main</strong> function operates by calling the CreateWebHostBuilder function to make the webserver and a new WarehousesViewer called to make the</p>
+                <p><h4>Classes</h4></p>
+                <p>The <strong>Coordinate</strong> class contains a function <strong>Coordinate</strong> which takes in and stores an x, y and z coordinate system for other methods that may call it.</p>
+                <p>The <strong>Item</strong> class takes in and stores data on an item including, database id, name, weight, aisle side and total number of the items. The class also contains the function:</p>
+                <ul>
+                <li><strong>ToString</strong> which returns the item name as a string.</li>
+                </ul>
+                <p>The <strong>itemCoordinate</strong> class which takes in and stores an x, y, and z coordinate similarly to the <strong>Coordinate </strong>but also includes aisle side and the number of items at the location.</p>
+                <p>The<strong> Job</strong> class file has multiple public functions.</p>
+                <ul>
+                <li><strong>currentPath:</strong> returns a peek at the next job in the queue with no inputs,</li>
+                <li><strong>currentTarget:</strong> returns the target position of a robot&rsquo;s current job,</li>
+                <li><strong>Name:</strong> returns the item name and quantity separated by a &ldquo;:&rdquo;,</li>
+                <li><strong>Job: </strong>function takes in and stores the job and item to be added to a job queue</li>
+                <li><strong>PeekNextNode:</strong> returns a peek at the current path node.</li>
+                <li><strong>UpdatePath:</strong> tasks a new path and updates the next position</li>
+                <li><strong>DequeueNextNode:</strong> returns the next node in the current path and removes the node from the queue.</li>
+                <li><strong>Peek:</strong> the function returns a peek at the job queue.</li>
+                <li><strong>Enqueue:</strong> the function takes a robot path and add it to the queue.</li>
+                <li><strong>Dequeue:</strong> the function returns the latest job in the queue.</li>
+                <li><strong>Any:</strong> returns a boolean if there is a current path for the robot.</li>
+                </ul>
+                <p>The<strong> Node</strong> class contains a function <strong>Node</strong> which takes in and stores if the next coordinate location is and will be empty and the corresponding x and y coordinate. The class also contains the function:</p>
+                <ul>
+                <li><strong>fCost </strong>which calculates a value which is used for pathfinding based on the current gCost and hCost variable values.</li>
+                </ul>
+                <p>The <strong>NodeWarehouse</strong> class contains a function <strong>NodeWarehouse</strong> which takes the current warehouse, warehouse size, and warehouse racks data to then create a grid via a private function CreateGrid. The class also contains the function:</p>
+                <ul>
+                <li><strong>GetNeighbours</strong> which takes a node within the warehouse grid and checks all surrounding nodes in a grid if it is a valid position within the constraints of the warehouse.</li>
+                </ul>
+                <p>The <strong>PathFinder</strong> class contains multiple functions.</p>
+                <ul>
+                <li><strong>PathFInder:</strong> takes in and stores a nodeWarehouse object.</li>
+                <li><strong>FindPath:</strong> takes in the current robot, the starting coordinates and the target coordinate and returns the best path for the robot to take to achieve reach the target position.</li>
+                <li><strong>RetracePath:</strong> takes in the robot, start node and end node and returns a modified robot path which is used to avoid collisions with other robots.</li>
+                <li><strong>GetDistance:</strong> takes in two nodes and returns the distance between the two.</li>
+                </ul>
+                <p>The <strong>Rack</strong> class contains multiple functions.</p>
+                <ul>
+                <li><strong>Rack:</strong> takes in and stores a name, starting position, rack length, warehouse, max number of shelves and max weight able to be handled by a shelf.</li>
+                <li><strong>AddItem:</strong> takes in an item class, and updates the rack position and adds the item to the rack.</li>
+                </ul>
+                <p>The<strong> Robot</strong> class contains multiple functions.</p>
+                <ul>
+                <li><strong>IsBusy:</strong> checks and returns if the robot is currently on a job.</li>
+                <li><strong>Job:</strong> returns a peek at the robot&rsquo;s current job.</li>
+                <li><strong>nextNode</strong> :returns a peek at the next node the robot would move to.</li>
+                <li><strong>Robot:</strong> takes in and stores all the required information to run the robot including the name, charging station position, warehouse, position, method, battery level, and weight limit which battery depletion and charging rates being set as well.</li>
+                <li><strong>GetItem:</strong> takes an item and quantity and creates a job to move a robot from the item&rsquo;s shelf location to the loading dock which is added to the job queue.</li>
+                <li><strong>RestockItem:</strong> takes an item and quantity and creates a job to move a robot from the loading dock to item&rsquo;s shelf location which is added to the job queue.</li>
+                <li><strong>Update:</strong> takes in and returns nothing but is responsible for updating the status of a robot repending on its position and if it is busy.</li>
+                <li><strong>Move:</strong> is responsible for moving the robot and collision avoidance.</li>
+                <li><strong>UpdatePath:</strong> updates the robot&rsquo;s path.</li>
+                <li><strong>GetDeliveryJob:</strong> takes an item, quantity, client name and job Id and returns a new job to be added to the job queue.</li>
+                <li><strong>GetRestockJob:</strong> takes an item and quantity and returns a new job to be added to the job queue.</li>
+                <li><strong>GetTargetPos:</strong> takes in an item and calculates a target position coordinate based on the coordinate and the left/right shelf designation.</li>
+                <li><strong>CollisionAvoidance:</strong> takes in the next node of a robot&rsquo;s path and returns a boolean if there is a robot in the next node.</li>
+                </ul>
+                <p>The <strong>RobotPath</strong> class contains multiple functions used to sort out the robot&rsquo;s path. The primary initializing method <strong>RobotPath</strong> creates an empty path queue and path length.</p>
+                <ul>
+                <li><strong>Peek:</strong> returns a peek at the next path node.</li>
+                <li><strong>Enqueue:</strong> takes a node and adds it to the path queue.</li>
+                <li><strong>Dequeue:</strong> returns a node and removes it from the path queue.</li>
+                <li><strong>Any:</strong> returns the next path.</li>
+                </ul>
+                <p>The <strong>Warehouse</strong> class contains multiple functions used to sort out the robot&rsquo;s path. The primary initializing method <strong>Warehouse</strong> takes a warehouse name and its dimensions and initializes the warehouse by calling InitializeWarehouse, warehouseDrawer and nodeWarehouse.</p>
+                <ul>
+                <li><strong>Items:</strong> creates a list of Items.</li>
+                <li><strong>Orders:</strong> returns a list of all jobs.</li>
+                <li><strong>maxItems: </strong>calculates and returns the maximum possible amounts of racks in a row.</li>
+                <li><strong>DeliveryItem:</strong> takes in an item, quantity and client name and sets the order to an available robot and adds it to a queue if none are available.</li>
+                <li><strong>RestockItem:</strong> takes an item and quantity and sets the job to an available robot and adds it to a queue if none are available.</li>
+                <li><strong>Draw:</strong> takes in an event argument and is used to draw objects in the winform.</li>
+                <li><strong>AddInitializedItem:</strong> takes an item, rack and target location and adds the items to the appropriate locations.</li>
+                <li><strong>AddItem:</strong> takes an item and a quantity and adds it to the warehouse.</li>
+                <li><strong>FindItem:</strong> takes an item&rsquo;s name and returns the Item class for that item.</li>
+                <li><strong>AddRobot:</strong> adds a robot to the list of robots.</li>
+                <li><strong>GetAllJobs:</strong> returns a job list.</li>
+                <li><strong>GetOrders</strong> takes the above job list and returns a processed job list.</li>
+                </ul>
+                <p>The <strong>WarehouseDrawer</strong> class contains multiple functions used to draw the warehouse in our warehouse visualization.</p>
+                <ul>
+                <li><strong>WarehouseDrawer:</strong> takes in a picture box and a warehouse class to then sort out the size of the warehouse that is draw in the Winform.</li>
+                <li><strong>Draw:</strong> takes in an event argument and calls the appropriate functions to create the warehouse simulation.</li>
+                <li><strong>DrawWarehouse:</strong> takes a graphic and adds the grid and colors to the display the warehouse.</li>
+                <li><strong>DrawRobots:</strong> takes a graphic and adds the grid and colors to the display the robots.</li>
+                <li><strong>DrawRacks:</strong> takes a graphic and adds the grid and colors to the display the racks</li>
+                </ul>
+                <p><h4>Controllers</h4></p>
+                <p><em>ValuesController.cs</em>: This is the controller file that contains the several classes which serve several key functions. As the main controller of the server and the administration WinForms window, it contains the functions such as the API listener which responds to the API GET requests made by the Web Server, the function that updates the quantity of merchandise after a purchase is made and such. A list of the classes and their methods are listed below:</p>
+                <ol>
+                <li><strong>Class PlaceOrderController: public ActionResult Get(string id)</strong>: This function listens to any API calls made by the Web Server, and takes the query string made by the GET request as its argument. It distinguishes if a request to purchase a merchandise can be successfully completed, then returns the response to the Web Server.</li>
+                <li><strong>Class updateListController: public ActionResult Get()</strong>: This function is invoked when the user clicks on the &ldquo;Merchandise&rdquo; menu, and makes a function call to Program.MainForm.updateList() which updates the list of merchandise, and returns an OK response with the string containing the information of the updated list of merchandise.</li>
+                <li><strong>Class RestockController: public ActionResult Get(string id):</strong> An id of the order is parsed into this method for it to perform re-stocking of a merchandise. The method will return an OK reponse upon completion.</li>
+                <li><strong>Class StockLevelController: public ActionResult Get(string id):</strong> This function simply takes the id of the order and returns the user with the update</li>
+                </ol>
+                <p><h4>WarehousesViewer</h4></p>
+                <p>The<strong> WarehousesViewer</strong> controls the code for the main warehouse WinForms. It has functionality to view all orders and initiate a <strong>WarehouseViewer</strong> for each warehouse. The functions are as follows:</p>
+                <ul>
+                <li><strong>WarehousesViewer</strong>: the function calls the functions InitializeComponent and InitializeWarehouse to initialize the warehouse.</li>
+                <li><strong>InitializeWarehouse: </strong>This function reads a csv file from the &ldquo;Warehouse Layout.csv&rdquo; and passes the warehouse name and dimensions to the WarehouseViewer function, initializes the objects in the racks with the InitializeOrders function, and adds the warehouse name to the winform.</li>
+                <li><strong>PlaceOrder:</strong> takes an item name, quantity, and client name and returns a string containing if the order has failed or succeeded. It ensures there is enough items in the warehouse to complete the order and splits up the order based on available quantity per warehouse.</li>
+                <li><strong>RestockItem:</strong> takes in an item a name and quantity and returns a string if the restocking was successful or not.</li>
+                <li><strong>UpdateList: </strong>updates all item quantities and returns a warehouse list containing all items in a warehouse in the format %name-quantity.</li>
+                <li><strong>GetItemStockLevel: </strong>takes an items name and returns the total inventory available for this item from all warehouses.</li>
+                <li><strong>InitializeOrders:</strong> reads the orders from the orders.csv file and assigns them to the list of orders.</li>
+                </ul>
+                <p><h4>WarehouseViewer</h4></p>
+                <p>The <strong>WarehouseViewer</strong> controls the code for the Winforms for each initiated warehouse. They contain the methods listed below:</p>
+                <ul>
+                <li><strong>NameOfWarehouse:</strong> This simply returns the name of the warehouse from a get request by the user.</li>
+                <li><strong>WarehouseViewer:</strong> Constructor for the WarehouseViewer, takes the parameters of the warehouse such as the dimensions of the warehouse as well as a name of the warehouse.</li>
+                <li><strong>GetItems:</strong> returns the list of items inside the warehouse.</li>
+                <li><strong>PlaceOrder:</strong> Intakes the name of the merchandise as well as the quantity the user wants to purchase. If the order can be successfully placed, it places it and returns a success message, otherwise it returns a message indicating the failure of the order placement.</li>
+                <li><strong>RestockItem:</strong> The name and the quantity of the merchandise that needs to be restocked are parsed as arguments, it finds the item of the merchandise to restock and restocks it in the database.</li>
+                <li><strong>GetItemStockLevel:</strong> The name of the merchandise is parsed as its argument, this method searches through the database and returns the quantity of that particular merchandise. If the merchandise does not exist, return &ndash;1.</li>
+                <li><strong>InitializeItems:</strong> As the name indicates, this method populates the items contained in each warehouse through reading a CSV file defined internally, assigns to each of the items a location and places them on the shelves upon the launch of the program.</li>
+                </ul>
+                <p><strong>Web UI/Web Server Classes &amp; Functions</strong></p>
+                <p><em>Summary:</em> The Model View Controller (MVC) framework is used to construct the Web UI for the front end of this project. In essence, the files defined in the MVC folders define the logic flow of the web server along with its treatment of user actions.</p>
+                <p><em>Please note that all of the functions described below are a part of the Amazoom-UI-with-DB project folder.</em></p>
+                <p><h4>Models</h4></p>
+                <p><em>Merchandise.cs</em>: This class and its functions are all publicly accessible. This class defines the properties associated with the object instantiated as Merchandise. This is important to note since the Database Schema is generated through Object Relational Mapping, the Migrations file defines the script that generates the schema can be read through the <em>20211130231315_initialsetup.cs.</em> For developers that are reviewing the code for the first time, this is important to mention since if anything in the database schema needs to be changed, this can be automated using this migrations file.</p>
+                <p><h4>Controller</h4></p>
+                <p><em>HomeController.cs:</em> This class contains the controller logic when the Web UI is initially connected by the user. The code contains procedural flow and re-directional calls to the Views() pages that would allow the users to navigate to and from the default front page, namely <em>Home</em>. Publicly accessible functions used for the main code procedural flow are individually named below, followed by a brief description:</p>
+                <ol>
+                <li>public IActionResult Index(): Returns the homepage to the Homepage.Index Views page.</li>
+                <li>public IActionResult Privacy(): Re-directs the user to the Privacy Page</li>
+                <li>public IActionResult Error(): Re-directs the user to the default Erro Page</li>
+                </ol>
+                <p><em>MerchandiseController.cs:</em> Contains the Web UI&rsquo;s central logic for user actions such as purchasing of merchandises, constructing the query string for purchase actions, and user authentication. The controller logic works coherently with the data parsed from the .cshtml files that contains user query action items. A list of essential publicly accessible functions are listed below, along with a brief description of their purpose:</p>
+                <ol>
+                <li><strong>public async Task&lt;IActionResult&gt; Index():</strong> Directs the user with a views page of the list of merchandises, namely Merchandise.Index.cshtml file that displays the merchandises, with the merchandises&rsquo; information. <em>Note that this is the general pattern of the syntax handler of the MVC framework, in which the Index() assumes the name of the caller and returns the relative path from that caller. In this case, the caller is Merchandise, and the Index() assumes the name of Merchandise.Index to return that cshtml file. This convention is followed through all of the functions that make calls to Index().</em></li>
+                <li><strong>public async Task&lt;IActionResult&gt; ShowSearchForm():</strong> Directs the user to views page of the SearchForm, namely ShowSearchForm.cshtml.</li>
+                <li><strong>public async Task&lt;IActionResult&gt; ShowSearchResults(String SearchPhrase):</strong> Intakes argument of the SearchPhrase (merchandise the user is searching for), and returns with a view of synchronized list of items it has found.</li>
+                <li><strong>public async Task&lt;ActionResult&gt; PurchaseAsync(int id, [Bind("Id,Name,qty")] Merchandise merchandise):</strong> When a singular purchase has been made by the user, this function is accessed by the Merchandise.index.cshtml file and factors the arguments: {id, merchandise}. Note that merchandise is constructed as a result of the binding in the parameters {Id, Name, qty} parsed. This would then call the API endpoint of the server that controls the warehousing, by parsing it a constructor created from the information of the merchandise that&rsquo;s purchased AND the username of the client that executes this transaction.</li>
+                <li><strong>public async Task&lt;ActionResult&gt; MultiplePurchasesAsync(int id, String purchaseQuantityNumber, [Bind("Id,Name,qty")] Merchandise merchandise)</strong>: This function takes the merchandise&rsquo;s information as arguments, and sends an API request to the warehouse server that allows the client to make multiple purchases of the same item. If an order is placed successfully, this re-directs to the <em>OrderPlaced</em> Views page; if the order cannot be placed, it will re-direct to the OrderFailed Views page with the pertinent information of why this purchase has failed. It should also be noted here that an user must be logged in and registered with the system in order to place an item.</li>
+                </ol>
+                <p>The rest of the controller functions are not publicly accessible by the stable version of the application.</p>
+                <h3>Testing</h3>
+                <p>Throughout this project, portions of code are separated and developed individually. Testing is executed on different sections of the code continuously and asynchronously as different requirements are implemented.</p>
+                <p>The Web UI is tested through a series of user interactions with the Website. The Web UI communicates with the API endpoint hosted by the server and therefore is most apparent when there is an error with the API processing of the string.</p>
+                <p>The following common cases were tested to ensure the frequent transactions initiated by the user can be successfully executed:</p>
+                <ul>
+                <li>Searching of a merchandise that doesn&rsquo;t exist in the database nor in the warehouse.</li>
+                <li>Searching of a merchandise with completely CAPITAL letters or completely lowercase letters to see if the search query is case-sensitive.</li>
+                <li>Searching of a merchandise that has just been newly added by the Amazoom administrator from the server side, and the quantity of the merchandise is accurately reflected on the website.</li>
+                <li>Purchasing of an item that is displayed.</li>
+                <li>Purchasing multiple quantity of a singular item which has been displayed, that EXCEEDS the quantity of that particular item which is currently in stock.</li>
+                <li>Upon purchase transaction is completed, go back to the list of merchandises and see if the quantity of the merchandise has been reflected based on the recent purchase.</li>
+                </ul>
+                <p>The server code that hosts the WinForms application and the simulation of the warehouse is tested by visually inspecting the simulation interface against different actions. Since the pathfinding algorithm is quite dynamic and may calculate paths with slight variations in different stages of the simulation, they are tested in edge cases to capture errors. The edge cases are:</p>
+                <ul>
+                <li>All of the warehouse robots are given instructions to fulfill orders that are parsed by the queue: this exposes the robots to potential chances of collision, and the collision avoidance algorithm can be tested and visualized by the Administration Interface.</li>
+                <li>Robot collecting an order with the merchandise comprised of weights larger than the robot&rsquo;s maximum capacity: demonstrates the activation of another robot which then fulfills the part of the order that is excessive of the weight limit of the first robot.</li>
+                <li>Robot of different warehouses collecting the items that&rsquo;s included in the same order: the tester can purchase an item that&rsquo;s stored in multiple warehouses and see if the robots are responsive in each warehouse that contains the merchandise if the number of merchandise cannot be completely retrieved from a singular warehouse.</li>
+                <li>Upon the addition of a completely new item, it can be reached by the robots through its newly assigned co-ordinates.</li>
+                </ul>
+         </div>
+
+
+
+		</div> <!-- /row -->
+		   	
+   </section> <!--styles -->	
+
+	
+   <!-- contact
+   ================================================== -->
+	<section id="contact">
+
+		<div class="row section-intro">
+   		<div class="col-twelve">
+
+   			<h5>Contact</h5>
+   			<h1>I'd Love To Hear From You.</h1>
+
+   			<p class="lead">Lorem ipsum Do commodo in proident enim in dolor cupidatat adipisicing dolore officia nisi aliqua incididunt Ut veniam lorem ipsum Consectetur ut in in eu do.</p>
+
+   		</div> 
+   	</div> <!-- /section-intro -->
+
+   	<div class="row contact-form">
+
+   		<div class="col-twelve">
+
+            <!-- form -->
+            <form name="contactForm" id="contactForm" method="post" action="">
+      			<fieldset>
+
+                  <div class="form-field">
+ 						   <input name="contactName" type="text" id="contactName" placeholder="Name" value="" minlength="2" required="">
+                  </div>
+                  <div class="form-field">
+	      			   <input name="contactEmail" type="email" id="contactEmail" placeholder="Email" value="" required="">
+	               </div>
+                  <div class="form-field">
+	     				   <input name="contactSubject" type="text" id="contactSubject" placeholder="Subject" value="">
+	               </div>                       
+                  <div class="form-field">
+	                 	<textarea name="contactMessage" id="contactMessage" placeholder="message" rows="10" cols="50" required=""></textarea>
+	               </div>                      
+                 <div class="form-field">
+                     <button class="submitform">Submit</button>
+                     <div id="submit-loader">
+                        <div class="text-loader">Sending...</div>                             
+       				      <div class="s-loader">
+								  	<div class="bounce1"></div>
+								  	<div class="bounce2"></div>
+								  	<div class="bounce3"></div>
+								</div>
+							</div>
+                  </div>
+
+      			</fieldset>
+      		</form> <!-- Form End -->
+
+            <!-- contact-warning -->
+            <div id="message-warning"></div>            
+            <!-- contact-success -->
+      		<div id="message-success">
+               <i class="fa fa-check"></i>Your message was sent, thank you!<br>
+      		</div>
+
+         </div> <!-- /col-twelve -->
+   		
+   	</div> <!-- /contact-form -->
+
+   	<div class="row contact-info">
+
+   		<div class="col-four tab-full">
+
+   			<div class="icon">
+   				<i class="icon-pin"></i>
+   			</div>
+
+   			<h5>Where to find me</h5>
+
+   			<p>
+            1600 Amphitheatre Parkway<br>
+            Mountain View, CA<br>
+            94043 US
+            </p>
+
+   		</div>
+
+   		<div class="col-four tab-full collapse">
+
+   			<div class="icon">
+   				<i class="icon-mail"></i>
+   			</div>
+
+   			<h5>Email Me At</h5>
+
+   			<p>someone@kardswebsite.com<br>
+			   	info@kardswebsite.com			     
+			   </p>
+
+   		</div>
+
+   		<div class="col-four tab-full">
+
+   			<div class="icon">
+   				<i class="icon-phone"></i>
+   			</div>
+
+   			<h5>Call Me At</h5>
+
+   			<p>Phone: (+63) 555 1212<br>
+			   	Mobile: (+63) 555 0100<br>
+			     	Fax: (+63) 555 0101
+			   </p>
+
+   		</div>
+   		
+   	</div> <!-- /contact-info -->
+		
+	</section> <!-- /contact -->
+
+
+   <!-- footer
+   ================================================== -->
+
+   <footer>
+     	<div class="row">
+
+     		<div class="col-six tab-full pull-right social">
+
+     			<ul class="footer-social">        
+			      <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+			      <li><a href="#"><i class="fa fa-behance"></i></a></li>
+			      <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+			      <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+			      <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+			   </ul> 
+	      		
+	      </div>
+
+      	<div class="col-six tab-full">
+	      	<div class="copyright">
+		        	<span>© Copyright Kards 2016.</span> 
+		        	<span>Design by <a href="http://www.styleshout.com/">styleshout</a></span>	         	
+		         </div>		                  
+	      	</div>
+
+	      	<div id="go-top">
+		         <a class="smoothscroll" title="Back to Top" href="#top"><i class="fa fa-long-arrow-up"></i></a>
+		      </div>
+
+      	</div> <!-- /row -->     	
+   </footer>    
+
+   <div id="preloader"> 
+    	<div id="loader"></div>
+   </div> 
+
+   <!-- Java Script
+   ================================================== --> 
+   <script src="js/jquery-2.1.3.min.js"></script>
+   <script src="js/plugins.js"></script>
+   <script src="js/main.js"></script>
+
+</body>
+
+</html>
