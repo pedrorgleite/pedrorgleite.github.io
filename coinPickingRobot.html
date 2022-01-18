@@ -7,7 +7,7 @@
    <!--- basic page needs
    ================================================== -->
    <meta charset="utf-8">
-	<title>Tractive System Light PCB Design</title>
+	<title>Amazon Warehouse Simulator</title>
 	<meta name="description" content="">  
 	<meta name="author" content="">
 
@@ -82,72 +82,37 @@
 
    		<div class="col-twelve">
 
-   			<h1>Tractive System Light PCB Design</h1>
+   			<h1>Reflow Oven Controller</h1>
 
    		</div>
 
      	</div> <!-- /row -->
 
      	<div class="row">
-
-     		<div>
-
-
-		      <p></a>
-		  		This was a project that I worked for <a href="https://www.ubcformulaelectric.com/home">UBC Formula Electric</a>
-				, from September of 2020 up until December of 2020. The tractive system active light (TSAL) is sort of like 
-				  a beacon on top of the car which indicates when the tractive system is active (when the car is turned on). 
-				  It uses constant current drivers to ensure that equal amounts of current go through each LED, and they use 
-				  as little power as possible to maximize efficiency.
-				</p>
-
-		  		<p>
-		  		<h3>The requirements for the project were:</h3>
-				<li>
-					Design must be made using your own git branch and updating the existing TSAL project
-				</li>
-				<li>
-					Must follow the PCB specification document located in the Electrical Systems folder on google drive
-				</li>
-				<li>
-					Inputs to the board are +24V, RED_EN (5V), GREEN_EN(5V), GND
-				</li>
-				<li>
-					According to the rules, when RED_EN is on, the TSAL must flash at 2 to 5 hz. This can be achieved with a 555 timer chip, which will also need to be implemented.
-				</li>
-				<li>
-					Board to wire connections must be plated through-holes large enough to accommodate 22AWG wire
-				</li>
-				<li>There must be 12 LEDs total on the board, 6 on the front, and 6 on the back. For each group of 6, 3 must be green and 3 must be red. The LED part numbers have to be the same as the previous design.
-				  </li>
- 			   </p>
-				<p>
-				<h3>Schematic</h3>
-				<p><img src="images/tsal_schematic.jpg"></p>
-				</p>
-				<p>
-				<div class="col-six tab-full">
-				<h3>PCB Layers</h3>
-				<h4>Top Layer</h4>
-				<p><img src="images/tsal_topLayer.jpg"></p>
-				</p>
-				<h4>Botton Layer</h4>
-				<p><img src="images/tsal_bottonLayer.jpg"></p>
-				</p>
-				</div>
-				<div class="col-six tab-full">
-				<h3>3d View</h3>
-				<h4>Top Layer</h4>
-				<p><img src="images/tsal_3dtopview.jpg"></p>
-				</p>
-				<h4>Botton Layer</h4>
-				<p><img src="images/tsal_3dbottonView.jpg"></p>
-				</p>
-				</div>
-
-         </div>
-
-
+         <p><h2>Hardware design<br /><br /></h2></p>
+         <p>This project I built a microcontroller-frequency-meter metal detector by using an inductor that combined with capacitors and a not gate creates a colpitts oscillator that changes the frequency of the pulses according to distance of the metal to the coil. The colpitts oscillator was built according to the diagram below.</p>
+         <img src="images/reflowOven_ui.png"><br /></p>
+         <p>Figure 1: Colpitts oscillator</p>
+         <p>For this implementation I used 10nF for capacitor C1, 100nF for capacitor C2, 1000𝛀 resistor and a 0.1H inductor. For the not gate I used two mosfets (N-channel and P-channel) back to back. The diagram of this implementation is shown below.</p>
+         <p>Figure 2: Not gate</p>
+         <p>The output of the not gate is inputted to the microcontroller which measures the period and the frequency of the pulses.</p>
+         <p>For the buzzer I used the combination of a diode and a bjt to create a simple switch that was able to beep when the coin was detected.The schematics of the circuit is shown below.</p>
+         <p>&nbsp;</p>
+         <img src="images/reflowOven_ui.png"><br /></p>
+         <p>Figure 3: Buzzer</p>
+         <p>The output of the microcontroller is been inputted to the 330𝛀 resistor that goes to the gate of the bjt that acts like a switch that turns the buzzer on and off.</p>
+         <p>In order to control both servo motors I used an external 6v battery to supply voltage to the motors. The servo motors have 3 signals which two are power and one is the control signal. This signal goes to the microcontroller that by supplying a pwm signal it can control the angle of the servo.This can be seen on the schematic below.</p>
+         <img src="images/reflowOven_ui.png"><br /></p>
+         <p>Figure 4: Servo Motor</p>
+         <img src="images/reflowOven_ui.png"><br /></p>
+         <p>Figure 5: Circuit schematic</p>
+         <img src="images/reflowOven_ui.png"><br /></p>
+         <p>Figure 6: High level design</p>
+         <p><h2>Software description</h2></p>
+         <p>The software was built to identify the frequency of the inductor and to output a pwm to both the servo motor and the speaker, turn the electromagnet on and off and also display on the lcd.</p>
+         <p>The inductor generates a pwm with a specific frequency and it changes when a metal gets closer to it. Thus,the detection of the coin was done by enabling the P0.0 as an input in line 75 and by using timer 0 to detect the period. After detecting the frequency range of the inductor without any metal, an if statement was used to turn the sound and change the angle of the servo motor if the frequency changes significantly. To create the sound a pwm was produced using timer 2. Moreover , in order to change the frequency of the sound according to the distance of the coin the variable of the inductor frequency was used as a variable to change the reload value of timer 2, this can be seen on the line 229.</p>
+         <p>The servo motor uses a pwm signal to change the angle of the motor. Since timer 5 has a maximum reload value of 10ms a FSM was implemented to get periods above 10ms. With this implementation it was possible to make a routine for the two motors to pick up and place the coin in the box in the most effective way. The speed was modulated by using a for loop to change the reload value(period) of the servo gradually. This enabled me to regulate the velocity while the magnet was with the coin, so there is no risk of the coin falling off.</p>
+         <p>The implementation of the electromagnet was simple, since it is just one signal that turns on and off. Thus I turned the pin on before the servo routine to pick up the coin and when it is close to the box so it can drop the coin inside it. And lastly, I added the lcd. For this I had to implement sprintf to create a string and call a function that displays the string to the LCD, then I created a variable that counts the amount of times a coin was detected and output it to the LCD.</p>
 
 		</div> <!-- /row -->
 		   	
